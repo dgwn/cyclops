@@ -8,8 +8,14 @@
 
 
     <p>
-        You are now logged in, and the system is ready for you {{email}}
+        You are now logged in, and the system is ready for you
     </p>
+    <a href="http://localhost:8000/cyclops/test/?filename=test1.jpg">
+    Test page
+    </a>
+    <button type="button" type="button" onclick="window.location.href='{{ url_for( 'upload'  ) }}';">
+            Upload New
+    </button>
 
 
 {% endblock %}
