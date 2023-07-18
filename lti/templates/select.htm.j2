@@ -1,0 +1,29 @@
+{% extends "base.htm.j2" %}
+
+{% block content %}
+
+<section id="panel-select">
+    <div id="overlay"></div>
+    <div id="loader" class="loader"></div> 
+    <div class="title-bar">
+        <h1>Select Your Document</h1>
+        <form action="back" method="post">
+            <button class="back-button large-button" type="submit" value="Back" >&#60; Back</button>
+        </form>
+    </div>
+    <p>Click the document you wish to import.  <strong>Note:</strong> Only DOCX, PPTX and HTML files are shown.</p>
+    <div id="file-list" class="file-list">
+        {% if not final_output %}
+        <img src="assets/ajax-loader.gif" alt="Loading file list, please wait." />
+        {% endif %}
+        {{ final_output }}
+    </div>
+    <script>
+        showLoad = () => {
+            document.getElementById("loader").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+        }
+    </script>
+</section>
+
+{% endblock %}

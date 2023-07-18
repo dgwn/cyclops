@@ -5,6 +5,8 @@ ENV = os.environ.get("ENV")
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = os.environ.get("SECRET_KEY")
+API_KEY = os.environ.get("API_KEY")
+API_URL = os.environ.get("API_URL")
 
 
 CACHE_TYPE = "filesystem"
