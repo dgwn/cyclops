@@ -181,7 +181,7 @@ def create_tree(folder_list):
 
 def display_children(tree):
     if len(tree["folders"]) == 0 and len(tree["files"]) == 0:
-        return "<li>No HTML, PPTX, or DOCX files.</li>"
+        return "<li>No image files.</li>"
     output = ""
     for folder in tree["folders"]:
         output += (

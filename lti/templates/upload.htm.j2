@@ -3,16 +3,18 @@
 {% block content %}
 
 <section id="panel-upload">
-    <h1>Upload Your Document</h1>
+    <h1 class="text-white">Upload Your Document</h1>
     <p>Click "Choose File" below, select your image file, and click "Submit".</p>
-    <div id="dropzone-div" class="inactive-dropzone">
+    <div class="mb-3 container">
         <form id="upload-form" action="{{ url_for('uploader') }}" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="MAX_FILE_SIZE" value="<?= $max_filesize ?>"/>
-            <p><label id="userfile-label" for="userfile">Select File:</label> <input type="file" name="userfile" id="userfile" accept=".png,.jpg"/></p>
-            <button id="btn-filesubmit" class="large-button" type="submit" value="Upload" onclick=showLoad()>Upload</button>
+            <input type="hidden" name="MAX_FILE_SIZE" class="form-control" value="<?= $max_filesize ?>"/>
+            <label id="userfile-label" for="userfile" class="form-label">Select File:</label> 
+            <input type="file" class="form-control" name="userfile" id="userfile" accept=".png,.jpg"/>
+            <button id="btn-filesubmit" class="btn btn-primary" type="submit" value="Upload" onclick=showLoad()>Upload</button>
         </form>
+
         <form action="back" method="post">
-            <button class="large-button" type="submit">&#60; Back</button>
+            <button class="btn btn-outline-primary" type="submit">&#60; Back</button>
         </form>
     </div>
 </section>

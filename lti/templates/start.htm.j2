@@ -2,23 +2,20 @@
 
 {% block content %}
 
-<div class="control-container">
-        <h2>Welcome to the Flask LTI 1.3 Simple Example Template.</h2>
-</div>
-
-
-    <p>
-        You are now logged in, and the system is ready for you
+<div class="container text-center">
+        <h1 class="text-white">Welcome</h1>
+        <div class="alert alert-warning" role="alert">
+                Notice: This tool works best on typed text. Handwriting support is experimental.
+        </div>
+        <p>
+        Choose an image to pull text from. You can either upload a new document or select one from your Course Files. 
     </p>
-    <a href="http://localhost:8000/cyclops/test/?filename=test1.jpg">
-    Test page
-    </a>
-    <button type="button" type="button" onclick="window.location.href='{{ url_for( 'upload'  ) }}';">
+    <button class="btn btn-primary" type="button" type="button" onclick="window.location.href='{{ url_for( 'upload'  ) }}';">
             Upload New
     </button>
-    <button id="btn-select" type="button" class="large-button" type="button" onclick="window.location.href='{{ url_for( 'select'  ) }}';">
+    <button class="btn btn-primary" id="btn-select" type="button" type="button" onclick="window.location.href='{{ url_for( 'select'  ) }}';">
             Select Existing
     </button>
 
-
+</div>
 {% endblock %}
