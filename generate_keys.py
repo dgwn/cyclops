@@ -75,7 +75,7 @@ lticonfig = LTIConfig(
 db.session.add(lticonfig)
 db.session.commit()
 
-print("JSON url: http://127.0.0.1:8000/lti13template/config/%s/json" % lticonfig.id)
+print("JSON url: http://127.0.0.1:8000/cyclops/config/%s/json" % lticonfig.id)
 
 message = """
 You will now need to install the tool into your LMS, and update the Deployment ID
