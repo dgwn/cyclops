@@ -13,6 +13,10 @@ from pylti1p3.contrib.flask import (
 from pylti1p3.exception import LtiException
 from pylti1p3.tool_config import ToolConfDict
 
+from urllib.parse import urlparse
+from PIL import Image
+import pytesseract
+
 
 class ReverseProxied(object):
     def __init__(self, app):
@@ -134,6 +138,7 @@ def get_launch_data_storage():
 # LTI 1.3 Routes
 # ============================================
 
+
 # OIDC Login
 @app.route("/login/", methods=["GET", "POST"])
 def login():
@@ -170,28 +175,30 @@ def launch():
         flask_request, tool_conf, launch_data_storage=launch_data_storage
     )
 
-    message_launch_data = message_launch.get_launch_data()
-
-    email = message_launch_data.get("email")
-
-    session["canvas_email"] = email
     session["launch_id"] = message_launch.get_launch_id()
+    session["course_id"] = message_launch.get_launch_data()[
+        "https://purl.imsglobal.org/spec/lti/claim/custom"
+    ]["canvas_course_id"]
+
     session["error"] = False
 
-    return render_template("start.htm.j2", email=email)
+    return render_template("start.htm.j2", launch_id=session["launch_id"])
 
 
 # Install JSON
 @app.route("/config/<key_id>/json", methods=["GET"])
 def config_json(key_id):
-    title = "Simple LTI 1.3"
-    description = "Simple LTI 1.3 Example"
+    title = "Cyclops LTI 1.3"
+    description = "Recognize text from images"
 
     public_jwk = LTIConfig.query.filter_by(id=key_id).first()
     public_jwk = json.loads(public_jwk.public_jwk)
 
     target_link_uri = url_for("launch", _external=True)
     oidc_initiation_url = url_for("login", _external=True)
+
+    domain = urlparse(request.url_root).netloc
+    server_url = domain + urlparse(request.url_root).path
 
     config = {
         "title": title,
@@ -203,11 +210,13 @@ def config_json(key_id):
                     "platform": "canvas.instructure.com",
                     "placements": [
                         {
-                            "placement": "course_navigation",
-                            "visibility": "admins",
-                            "default": "disabled",
-                            "message_type": "LtiResourceLinkRequest",
-                            "target_link_uri": target_link_uri,
+                            "text": "Cyclops: Text Recognition",
+                            "icon_url": f"http://{server_url}icon/",
+                            "placement": "editor_button",
+                            "message_type": "LtiDeepLinkingRequest",
+                            "selection_width": 590,
+                            "target_link_uri": f"http://{server_url}launch/",
+                            "selection_height": 490,
                         }
                     ],
                 },
@@ -225,3 +234,16 @@ def config_json(key_id):
     }
 
     return jsonify(config)
+
+
+@app.route("/test/", methods=["GET"])
+def test():
+    filename = request.args["filename"]
+    return pytesseract.image_to_string(Image.open("./images/" + filename))
+
+
+# Route to view File Uploader
+@app.route("/upload/", methods=["GET"])
+def upload():
+    launch_id = session["launch_id"]
+    return render_template("upload.htm.j2", launch_id=launch_id)
