@@ -170,3 +170,6 @@ lti/lti_cache_dir
 
 # images
 lti/images/*
+
+# api
+api.json

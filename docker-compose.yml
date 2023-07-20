@@ -23,6 +23,9 @@ services:
       - type: bind
         source: ./pyproject.toml
         target: /app/pyproject.toml
+      - type: bind
+        source: ./api.json
+        target: /app/api.json
     ports:
       - "8000:80"
     env_file:
@@ -30,3 +33,4 @@ services:
     environment:
       - MODULE_NAME=app
       - FLASK_APP=main.py
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/api.json
