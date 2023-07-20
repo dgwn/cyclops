@@ -12,12 +12,21 @@ li {
 li.file {
   margin-left: -1px !important;
 }
-li.file a {
+li.file p {
   background: url("assets/document.png") 0 0 no-repeat;
   color: #fff;
   padding-left: 21px;
   text-decoration: none;
   display: block;
+}
+.filename-div {
+  display: flex;
+}
+.filename-div a {
+  margin: 0 5px;
+}
+li.file a {
+  background: none;
 }
 li input {
   position: absolute;

@@ -5,7 +5,7 @@
 <section id="panel-upload">
     <h1 class="text-white">Upload Your Document</h1>
     <p>Please select a model to scan your image. Then click "Choose File" below, select your image file, and click "Submit".</p>
-    <div class=" container">
+    <div class="mb-3 container">
         <form id="upload-form" action="{{ url_for('uploader') }}" method="post" enctype="multipart/form-data">
             <div class="form-check form-check-inline">
                 <input class="form-check-input" type="radio" name="model" id="inlineRadio1" value="tesseract" checked>
