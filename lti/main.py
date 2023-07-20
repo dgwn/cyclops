@@ -200,10 +200,10 @@ def display_children(tree):
                 <div class="filename-div">
                     <p>{file["name"]}</p>
                     <a class="file-link" href="/cyclops/load?filename={file["filename"]}&fileid={file["id"]}&model=tesseract">
-                        <button type="button" class="btn btn-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Tesseract</button>
+                        <button type="button" class="btn btn-light" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .70rem;">Tesseract</button>
                     </a>
                     <a class="file-link" href="/cyclops/load?filename={file["filename"]}&fileid={file["id"]}&model=vision">
-                        <button type="button" class="btn btn-outline-primary" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Vision</button>                    </a>
+                        <button type="button" class="btn btn-outline-light" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .70rem;">Vision</button>                    </a>
                 </div>
             </li>
             """
