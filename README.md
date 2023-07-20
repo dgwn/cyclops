@@ -51,3 +51,7 @@ The tool will now be running at: <http://127.0.0.1:8000/cyclops/> and available 
 [Instructure](https://github.com/instructure/) for their LMS: [Canvas](https://github.com/instructure/canvas-lms)
 
 [IMS Global](https://imsglobal.org) for defining the LTI standards.
+
+For more info on Google Cloud Vision API see [here](https://cloud.google.com/vision/docs/handwriting).
+
+For documentation on Tesseract see [here](https://tesseract-ocr.github.io).
