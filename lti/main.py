@@ -212,14 +212,6 @@ def display_children(tree):
 def vision_ocr(content):
     image = vision.Image(content=content)
     response = client.document_text_detection(image=image)
-
-    # texts = response.text_annotations
-    # print(texts)
-    # document = ""
-    # for text in texts:
-    #     document += text["description"]
-    # return document
-
     docText = response.full_text_annotation.text
     return docText
 
