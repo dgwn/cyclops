@@ -17,6 +17,8 @@ cp .env.template .env
 
 ```
 
+Save your Google API JSON as a file `api.json` in your project directory and make sure it is `.gitignore`'d. Be mindful Docker currently copies this file into the container, so take caution not to share your image with anybody.
+
 In this simple framework all the variables are preset, but for production you will want to edit the .env environment variables DEBUG and SECRET_KEY.
 
 We use Docker-Compose to build and run our services.
