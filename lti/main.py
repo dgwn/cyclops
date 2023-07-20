@@ -1,5 +1,6 @@
 import json
-import os, io
+import os
+import io
 import requests
 
 from flask import (
