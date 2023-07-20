@@ -2,7 +2,7 @@
 
 ## About
 
-This tool is available through the Rich Content Editor in Canvas, and allows users to extract text from images, either uploaded through the tool, or taken from the user's course files.
+This tool is available through the Rich Content Editor in Canvas, and allows users to extract text from images, either uploaded through the tool, or taken from the user's course files. It has two options for OCR models, Tesseract (Open Source) and Vision API (Google). You will need an API key to use the latter.
 
 It was built from the [LTI 1.3 Flask Template](https://github.com/ucfopen/lti-13-template-flask).
 
