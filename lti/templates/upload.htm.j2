@@ -3,7 +3,15 @@
 {% block content %}
 
 <section id="panel-upload">
-    <h1 class="text-white">Upload Your Document</h1>
+    <div class="title-bar row">
+        <div class="col col-9">
+            <h1 class="text-white">Upload Your Document</h1>
+        </div>
+        <div class="col col-3 pt-1">
+            <form action="back" method="post">
+                <button class="btn btn-outline-primary" type="submit" value="Back" >&#60; Back</button>
+            </form>
+    </div>
     <p>Please select a model to scan your image. Then click "Choose File" below, select your image file, and click "Submit".</p>
     <div class="mb-3 container">
         <form id="upload-form" action="{{ url_for('uploader') }}" method="post" enctype="multipart/form-data">
@@ -20,10 +28,6 @@
             <label id="userfile-label" for="userfile" class="form-label">Select File:</label> 
             <input type="file" class="form-control" name="userfile" id="userfile" accept=".png,.jpg"/>
             <button id="btn-filesubmit" class="btn btn-primary" type="submit" value="Upload" onclick=showLoad()>Upload</button>
-        </form>
-
-        <form action="back" method="post">
-            <button class="btn btn-outline-primary" type="submit">&#60; Back</button>
         </form>
     </div>
 </section>
