@@ -1,5 +1,5 @@
 import json
-import os
+import os, io
 import requests
 
 from flask import (
@@ -31,6 +31,7 @@ from PIL import Image
 import pytesseract
 from canvasapi import Canvas
 from canvasapi.exceptions import CanvasException
+from google.cloud import vision
 
 from config import API_URL, API_KEY
 
@@ -55,6 +56,7 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 canvas = Canvas(API_URL, API_KEY)
+client = vision.ImageAnnotatorClient()
 
 # ============================================
 # Extended Classes in pylti1p3 lib
@@ -198,6 +200,21 @@ def display_children(tree):
             f'fileid={file["id"]}">{file["name"]}</a></li>'
         )
     return output
+
+
+def vision_ocr(content):
+    image = vision.Image(content=content)
+    response = client.document_text_detection(image=image)
+
+    # texts = response.text_annotations
+    # print(texts)
+    # document = ""
+    # for text in texts:
+    #     document += text["description"]
+    # return document
+
+    docText = response.full_text_annotation.text
+    return docText
 
 
 # ============================================
@@ -443,13 +460,16 @@ def embed():
     )
 
     filename = session["filename"]
-    data = pytesseract.image_to_string(Image.open("./images/" + filename))
-    os.remove("./images/" + filename)
 
-    # file_path = os.path.join("images/", session["filename"] + ".html")
-    # print(file_path)
-    # with open(file_path, "r") as file:
-    #     data = file.read()
+    # Tesseract processing
+    data = pytesseract.image_to_string(Image.open("./images/" + filename))
+
+    # Cloud Vision processing
+    # with io.open("./images/" + filename, "rb") as image_file:
+    #     content = image_file.read()
+    # data = vision_ocr(content)
+
+    os.remove("./images/" + filename)
 
     # Prepares the Embedding (Deep Link Resource) and returns the html onto the page
     resource = DeepLinkResource()
