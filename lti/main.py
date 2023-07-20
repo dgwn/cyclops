@@ -403,12 +403,15 @@ def upload():
 @app.route("/uploader", methods=["POST"])
 def uploader():
     if request.method == "POST":
+        model = request.form["model"]
         f = request.files["userfile"]
         session["filename"] = secure_filename(f.filename)
         if f:
             f.save(os.path.join("images", secure_filename(f.filename)))
             return redirect(
-                url_for("load", filename=session["filename"], fileid="upload")
+                url_for(
+                    "load", filename=session["filename"], fileid="upload", model=model
+                )
             )
         else:
             return redirect(url_for("upload"))
@@ -424,6 +427,7 @@ def homeBack():
 # Route to save filename and ext type to session
 @app.route("/load/", methods=["GET"])
 def load():
+    model = request.args["model"]
     course_id = session["course_id"]
     filename = request.args["filename"]
     file_id = request.args["fileid"]
@@ -444,12 +448,12 @@ def load():
 
         with open(file_path, "wb") as f:
             f.write(download_url.content)
-
-    return redirect(url_for("embed"))
+    return redirect(url_for("embed", model=model))
 
 
 @app.route("/embed/", methods=["GET"])
 def embed():
+    model = request.args["model"]
     # network configs
     tool_conf = get_lti_config(session["iss"], session["client_id"])
     flask_request = FlaskRequest()
@@ -462,12 +466,14 @@ def embed():
     filename = session["filename"]
 
     # Tesseract processing
-    data = pytesseract.image_to_string(Image.open("./images/" + filename))
+    if model == "tesseract":
+        data = pytesseract.image_to_string(Image.open("./images/" + filename))
 
     # Cloud Vision processing
-    # with io.open("./images/" + filename, "rb") as image_file:
-    #     content = image_file.read()
-    # data = vision_ocr(content)
+    if model == "vision":
+        with io.open("./images/" + filename, "rb") as image_file:
+            content = image_file.read()
+        data = vision_ocr(content)
 
     os.remove("./images/" + filename)
 
