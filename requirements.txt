@@ -8,6 +8,7 @@ Flask-Caching==2.0.1
 Flask-Migrate==2.6.0
 git+https://github.com/ucfopen/pylti1.3.git@master
 cryptography==39.0.2
+google-cloud-vision
 mysqlclient==2.1.1
 pycryptodome
 pytesseract

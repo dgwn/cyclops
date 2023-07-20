@@ -6,6 +6,8 @@ WORKDIR /app
 COPY requirements.txt /app/
 COPY test_requirements.txt /app/
 RUN echo $REQUIREMENTS
+RUN pip install --upgrade pip
+RUN pip install --upgrade setuptools wheel
 RUN pip install -r $REQUIREMENTS
 RUN apt install -y tesseract-ocr
 COPY ./lti/ /app/

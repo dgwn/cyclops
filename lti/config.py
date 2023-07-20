@@ -7,6 +7,7 @@ ENV = os.environ.get("ENV")
 SECRET_KEY = os.environ.get("SECRET_KEY")
 API_KEY = os.environ.get("API_KEY")
 API_URL = os.environ.get("API_URL")
+GOOGLE_APPLICATION_CREDENTIALS = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS")
 
 
 CACHE_TYPE = "filesystem"
